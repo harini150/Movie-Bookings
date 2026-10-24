@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Movies - MovieBook</title>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #07090d;
+    color: white;
+}
+
+header {
+    height: 76px;
+    background: #080a0f;
+    border-bottom: 1px solid #222;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 7%;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.logo span,
+nav a:hover,
+nav .active,
+footer span {
+    color: #e50914;
+}
+
+nav ul {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+}
+
+nav a {
+    color: #ccc;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.page-header {
+    text-align: center;
+    padding: 55px 20px 35px;
+}
+
+.small-title {
+    color: #e50914;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.page-header h1 {
+    font-size: 38px;
+    margin-bottom: 12px;
+}
+
+.page-header p {
+    color: #888;
+    font-size: 14px;
+}
+
+.filter {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto 35px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.categories {
+    display: flex;
+    gap: 9px;
+    flex-wrap: wrap;
+}
+
+.category {
+    padding: 9px 17px;
+    border-radius: 20px;
+    background: #11141a;
+    border: 1px solid #292e37;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.category.active,
+.category:hover {
+    background: #e50914;
+    color: white;
+}
+
+.search input {
+    width: 230px;
+    padding: 11px 14px;
+    background: #11141a;
+    border: 1px solid #292e37;
+    border-radius: 8px;
+    color: white;
+    outline: none;
+}
+
+.movie-container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+    padding-bottom: 70px;
+}
+
+.movie-card {
+    background: #0e1117;
+    border: 1px solid #22262f;
+    border-radius: 14px;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.movie-card:hover {
+    transform: translateY(-6px);
+    border-color: #e50914;
+}
+
+.poster {
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(145deg, #1b1f29, #0b0e14);
+}
+
+.poster h2 {
+    font-size: 27px;
+    text-align: center;
+}
+
+.movie-info {
+    padding: 18px;
+}
+
+.movie-info h2 {
+    font-size: 17px;
+    margin-bottom: 7px;
+}
+
+.genre {
+    color: #858b95;
+    font-size: 12px;
+    margin-bottom: 12px;
+}
+
+.rating {
+    color: #f5b942;
+    font-size: 12px;
+    margin-bottom: 16px;
+}
+
+.book-btn {
+    width: 100%;
+    padding: 11px;
+    background: #e50914;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.book-btn:hover {
+    background: #b80710;
+}
+
+footer {
+    background: #05070a;
+    border-top: 1px solid #222;
+    padding: 28px;
+    text-align: center;
+}
+
+footer p {
+    color: #777;
+    font-size: 12px;
+}
+
+@media(max-width: 1000px) {
+    .movie-container {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media(max-width: 700px) {
+    nav {
+        display: none;
+    }
+
+    .filter {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .search input {
+        width: 100%;
+    }
+
+    .movie-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media(max-width: 480px) {
+    .movie-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        🎬 Movie<span>Book</span>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="movies.html" class="active">Movies</a></li>
+            <li><a href="#">Cinemas</a></li>
+            <li><a href="#">Offers</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+    </nav>
+
+</header>
+
+<section class="page-header">
+
+    <div class="small-title">
+        MOVIEBOOK CINEMA
+    </div>
+
+    <h1>
+        Choose Your Movie
+    </h1>
+
+    <p>
+        Select a movie and continue to choose your cinema and showtime.
+    </p>
+
+</section>
+
+<div class="filter">
+
+    <div class="categories">
+
+        <button class="category active">All</button>
+        <button class="category">Action</button>
+        <button class="category">Romance</button>
+        <button class="category">Comedy</button>
+        <button class="category">Thriller</button>
+
+    </div>
+
+    <div class="search">
+        <input type="text" placeholder="Search movie...">
+    </div>
+
+</div>
+
+<div class="movie-container">
+
+    <div class="movie-card">
+        <div class="poster">
+            <h2>Sita Ramam</h2>
+        </div>
+        <div class="movie-info">
+            <h2>Sita Ramam</h2>
+            <p class="genre">Romance / Drama</p>
+            <p class="rating">★ 8.6 / 10</p>
+            <button class="book-btn" onclick="location.href='cinema.html'">
+                Book Now →
+            </button>
+        </div>
+    </div>
+
+    <div class="movie-card">
+        <div class="poster">
+            <h2>Remo</h2>
+        </div>
+        <div class="movie-info">
+            <h2>Remo</h2>
+            <p class="genre">Comedy / Romance</p>
+            <p class="rating">★ 7.0 / 10</p>
+            <button class="book-btn" onclick="location.href='cinema.html'">
+                Book Now →
+            </button>
+        </div>
+    </div>
+
+    <div class="movie-card">
+        <div class="poster">
+            <h2>Jananayagan</h2>
+        </div>
+        <div class="movie-info">
+            <h2>Jananayagan</h2>
+            <p class="genre">Action</p>
+            <p class="rating">★ 8.2 / 10</p>
+            <button class="book-btn" onclick="location.href='cinema.html'">
+                Book Now →
+            </button>
+        </div>
+    </div>
+
+    <div class="movie-card">
+        <div class="poster">
+            <h2>Theri</h2>
+        </div>
+        <div class="movie-info">
+            <h2>Theri</h2>
+            <p class="genre">Action / Thriller</p>
+            <p class="rating">★ 7.3 / 10</p>
+            <button class="book-btn" onclick="location.href='cinema.html'">
+                Book Now →
+            </button>
+        </div>
+    </div>
+
+    <div class="movie-card">
+        <div class="poster">
+            <h2>Spider-Man</h2>
+        </div>
+        <div class="movie-info">
+            <h2>Spider-Man</h2>
+            <p class="genre">Action / Fantasy</p>
+            <p class="rating">★ 8.4 / 10</p>
+            <button class="book-btn" onclick="location.href='cinema.html'">
+                Book Now →
+            </button>
+        </div>
+    </div>
+
+    <div class="movie-card">
+        <div class="poster">
+            <h2>Master</h2>
+        </div>
+        <div class="movie-info">
+            <h2>Master</h2>
+            <p class="genre">Action / Drama</p>
+            <p class="rating">★ 7.3 / 10</p>
+            <button class="book-btn" onclick="location.href='cinema.html'">
+                Book Now →
+            </button>
+        </div>
+    </div>
+
+    <div class="movie-card">
+        <div class="poster">
+            <h2>Beast</h2>
+        </div>
+        <div class="movie-info">
+            <h2>Beast</h2>
+            <p class="genre">Action / Drama</p>
+            <p class="rating">★ 8.5 / 10</p>
+            <button class="book-btn" onclick="location.href='cinema.html'">
+                Book Now →
+            </button>
+        </div>
+    </div>
+
+    <div class="movie-card">
+        <div class="poster">
+            <h2>Leo</h2>
+        </div>
+        <div class="movie-info">
+            <h2>Leo</h2>
+            <p class="genre">Action / Thriller</p>
+            <p class="rating">★ 7.5 / 10</p>
+            <button class="book-btn" onclick="location.href='cinema.html'">
+                Book Now →
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+
+    <p>
+        © 2026 <span>MovieBook</span> |
+        Movie Ticket Booking System |
+        Internship Project
+    </p>
+
+</footer>
+
+</body>
+</html>

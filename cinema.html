@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Cinema - MovieBook</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #07090d;
+            color: white;
+        }
+        header {
+            height: 76px;
+            background: #080a0f;
+            border-bottom: 1px solid #1d2129;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+        }
+        .logo span {
+            color: #e50914;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 35px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #c6c9cf;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+        nav ul li a:hover {
+            color: #e50914;
+        }
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+        }
+        .login {
+            padding: 9px 19px;
+            border-radius: 8px;
+            border: 1px solid #343943;
+            background: transparent;
+            color: white;
+            cursor: pointer;
+            font-family: inherit;
+        }
+        .signup {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #e50914;
+            color: white;
+            font-family: inherit;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .page-header {
+            padding: 55px 7% 45px;
+            background:
+                linear-gradient(
+                    rgba(7,9,13,0.78),
+                    rgba(7,9,13,1)
+                ),
+                url("images/cinema-bg.jpg");
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+        }
+        .step-label {
+            display: inline-block;
+            padding: 7px 15px;
+            border-radius: 20px;
+            background: rgba(229,9,20,0.12);
+            border: 1px solid rgba(229,9,20,0.4);
+
+            color: #ff3b43;
+
+            font-size: 11px;
+            font-weight: 600;
+
+            letter-spacing: 1px;
+        }
+
+        .page-header h1 {
+            font-size: 38px;
+            margin: 15px 0 8px;
+        }
+
+        .page-header p {
+            color: #969ba5;
+            font-size: 14px;
+        }
+
+        .selected-movie {
+            color: white;
+            font-weight: 600;
+        }
+
+        .selected-movie span {
+            color: #e50914;
+        }
+
+        /* ================= BREADCRUMB ================= */
+
+        .progress {
+            width: 86%;
+            margin: 35px auto 15px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .progress-step {
+            display: flex;
+            align-items: center;
+        }
+
+        .circle {
+            width: 34px;
+            height: 34px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #e50914;
+            color: white;
+
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .circle.inactive {
+            background: #20242c;
+            color: #777c85;
+        }
+
+        .line {
+            width: 80px;
+            height: 2px;
+            background: #282c34;
+        }
+
+        .line.active {
+            background: #e50914;
+        }
+
+        /* ================= SECTION ================= */
+
+        .cinema-section {
+            width: 86%;
+            margin: 0 auto 70px;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            margin: 35px 0 20px;
+        }
+
+        .section-heading h2 {
+            font-size: 22px;
+        }
+
+        .location {
+            color: #9a9fa8;
+            font-size: 13px;
+        }
+
+        /* ================= CINEMA GRID ================= */
+
+        .cinema-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 24px;
+        }
+
+        .cinema-card {
+            background: #0e1117;
+
+            border: 1px solid #222630;
+
+            border-radius: 14px;
+
+            overflow: hidden;
+
+            transition: 0.35s;
+        }
+
+        .cinema-card:hover {
+            transform: translateY(-6px);
+            border-color: #e50914;
+
+            box-shadow:
+                0 15px 35px rgba(0,0,0,0.35);
+        }
+
+        /* ================= CINEMA IMAGE ================= */
+
+        .cinema-image {
+            width: 100%;
+            height: 190px;
+
+            overflow: hidden;
+
+            position: relative;
+        }
+
+        .cinema-image img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+
+            transition: 0.4s;
+        }
+
+        .cinema-card:hover .cinema-image img {
+            transform: scale(1.06);
+        }
+
+        .premium {
+            position: absolute;
+
+            top: 12px;
+            left: 12px;
+
+            background: #e50914;
+
+            padding: 5px 9px;
+
+            border-radius: 5px;
+
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        /* ================= CINEMA INFO ================= */
+
+        .cinema-info {
+            padding: 19px;
+        }
+
+        .cinema-info h2 {
+            font-size: 17px;
+            margin-bottom: 7px;
+        }
+
+        .cinema-location {
+            color: #898e98;
+            font-size: 12px;
+            margin-bottom: 15px;
+        }
+
+        .cinema-details {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+
+            margin-bottom: 17px;
+        }
+
+        .tag {
+            background: #171a21;
+
+            border: 1px solid #292d35;
+
+            color: #aeb2ba;
+
+            padding: 5px 9px;
+
+            border-radius: 5px;
+
+            font-size: 10px;
+        }
+
+        .shows {
+            display: flex;
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 17px;
+        }
+
+        .shows span:first-child {
+            color: #8e939c;
+            font-size: 11px;
+        }
+
+        .shows span:last-child {
+            color: #57d68d;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .select-cinema {
+            width: 100%;
+
+            padding: 11px;
+
+            background: #e50914;
+            color: white;
+
+            border: none;
+
+            border-radius: 7px;
+
+            font-family: inherit;
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .select-cinema:hover {
+            background: #b80710;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #05070a;
+
+            border-top: 1px solid #1c2028;
+
+            padding: 25px;
+
+            text-align: center;
+        }
+
+        footer p {
+            color: #777c86;
+            font-size: 12px;
+        }
+
+        footer span {
+            color: #e50914;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width: 1000px) {
+
+            nav ul {
+                gap: 15px;
+            }
+
+            .cinema-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width: 700px) {
+
+            nav {
+                display: none;
+            }
+
+            .cinema-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .progress {
+                display: none;
+            }
+
+            .page-header h1 {
+                font-size: 30px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<header>
+
+    <div class="logo">
+        🎬 Movie<span>Book</span>
+    </div>
+
+    <nav>
+
+        <ul>
+
+            <li>
+                <a href="index.html">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="movies.html">
+                    Movies
+                </a>
+            </li>
+
+            <li>
+                <a href="#" class="active">
+                    Cinemas
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    Offers
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    About Us
+                </a>
+            </li>
+
+            <li>
+                <a href="#">
+                    Contact
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+    <div class="nav-buttons">
+
+        <button class="login">
+            Login
+        </button>
+
+        <button class="signup">
+            Sign Up
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- ================= PAGE HEADER ================= -->
+
+<section class="page-header">
+
+    <div class="step-label">
+        STEP 2 OF 5
+    </div>
+
+    <h1>
+        Select Your Cinema
+    </h1>
+
+    <p class="selected-movie">
+        Showing cinemas for
+        <span id="movieName">
+            Selected Movie
+        </span>
+    </p>
+
+</section>
+
+
+<!-- ================= BOOKING PROGRESS ================= -->
+
+<div class="progress">
+
+    <div class="progress-step">
+        <div class="circle">
+            ✓
+        </div>
+    </div>
+
+    <div class="line active"></div>
+
+    <div class="progress-step">
+        <div class="circle">
+            2
+        </div>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="progress-step">
+        <div class="circle inactive">
+            3
+        </div>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="progress-step">
+        <div class="circle inactive">
+            4
+        </div>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="progress-step">
+        <div class="circle inactive">
+            5
+        </div>
+    </div>
+
+</div>
+
+
+<!-- ================= CINEMAS ================= -->
+
+<section class="cinema-section">
+
+    <div class="section-heading">
+
+        <h2>
+            Available Cinemas
+        </h2>
+
+        <div class="location">
+            📍 Chennai
+        </div>
+
+    </div>
+
+
+    <div class="cinema-grid">
+
+
+        <!-- CINEMA 1 -->
+
+        <div class="cinema-card">
+
+            <div class="cinema-image">
+
+                <img
+                    src="pvr.jpg"
+                    alt="PVR Cinemas">
+
+                <div class="premium">
+                    PREMIUM
+                </div>
+
+            </div>
+
+            <div class="cinema-info">
+
+                <h2>
+                    PVR INOX
+                </h2>
+
+                <div class="cinema-location">
+                    📍 VR Chennai, Anna Nagar
+                </div>
+
+                <div class="cinema-details">
+
+                    <span class="tag">
+                        IMAX
+                    </span>
+
+                    <span class="tag">
+                        4K
+                    </span>
+
+                    <span class="tag">
+                        Dolby Atmos
+                    </span>
+
+                </div>
+
+                <div class="shows">
+
+                    <span>
+                        Today's Shows
+                    </span>
+
+                    <span>
+                        ● 8 Shows Available
+                    </span>
+
+                </div>
+
+                <button
+                    class="select-cinema"
+                    onclick="selectCinema('PVR INOX')">
+
+                    Select Cinema
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- CINEMA 2 -->
+
+        <div class="cinema-card">
+
+            <div class="cinema-image">
+
+                <img
+                    src="ags.jpg"
+                    alt="AGS Cinemas">
+
+            </div>
+
+            <div class="cinema-info">
+
+                <h2>
+                    AGS Cinemas
+                </h2>
+
+                <div class="cinema-location">
+                    📍 T Nagar, Chennai
+                </div>
+
+                <div class="cinema-details">
+
+                    <span class="tag">
+                        4K
+                    </span>
+
+                    <span class="tag">
+                        Dolby Atmos
+                    </span>
+
+                    <span class="tag">
+                        Recliner
+                    </span>
+
+                </div>
+
+                <div class="shows">
+
+                    <span>
+                        Today's Shows
+                    </span>
+
+                    <span>
+                        ● 6 Shows Available
+                    </span>
+
+                </div>
+
+                <button
+                    class="select-cinema"
+                    onclick="selectCinema('AGS Cinemas')">
+
+                    Select Cinema
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- CINEMA 3 -->
+
+        <div class="cinema-card">
+
+            <div class="cinema-image">
+
+                <img
+                    src="rohini.jpg"
+                    alt="Rohini Silver Screens">
+
+            </div>
+
+            <div class="cinema-info">
+
+                <h2>
+                    Rohini Silver Screens
+                </h2>
+
+                <div class="cinema-location">
+                    📍 Koyambedu, Chennai
+                </div>
+
+                <div class="cinema-details">
+
+                    <span class="tag">
+                        4K
+                    </span>
+
+                    <span class="tag">
+                        Dolby Atmos
+                    </span>
+
+                    <span class="tag">
+                        3D
+                    </span>
+
+                </div>
+
+                <div class="shows">
+
+                    <span>
+                        Today's Shows
+                    </span>
+
+                    <span>
+                        ● 7 Shows Available
+                    </span>
+
+                </div>
+
+                <button
+                    class="select-cinema"
+                    onclick="selectCinema('Rohini Silver Screens')">
+
+                    Select Cinema
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- CINEMA 4 -->
+
+        <div class="cinema-card">
+
+            <div class="cinema-image">
+
+                <img
+                    src="sathyam.jpg"
+                    alt="Sathyam Cinemas">
+
+            </div>
+
+            <div class="cinema-info">
+
+                <h2>
+                    Sathyam Cinemas
+                </h2>
+
+                <div class="cinema-location">
+                    📍 Royapettah, Chennai
+                </div>
+
+                <div class="cinema-details">
+
+                    <span class="tag">
+                        IMAX
+                    </span>
+
+                    <span class="tag">
+                        4K
+                    </span>
+
+                    <span class="tag">
+                        Recliner
+                    </span>
+
+                </div>
+
+                <div class="shows">
+
+                    <span>
+                        Today's Shows
+                    </span>
+
+                    <span>
+                        ● 9 Shows Available
+                    </span>
+
+                </div>
+
+                <button
+                    class="select-cinema"
+                    onclick="selectCinema('Sathyam Cinemas')">
+
+                    Select Cinema
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- CINEMA 5 -->
+
+        <div class="cinema-card">
+
+            <div class="cinema-image">
+
+                <img
+                    src="luxecinemas.jpg"
+                    alt="Luxe Cinemas">
+
+            </div>
+
+            <div class="cinema-info">
+
+                <h2>
+                    Luxe Cinemas
+                </h2>
+
+                <div class="cinema-location">
+                    📍 Phoenix Marketcity, Chennai
+                </div>
+
+                <div class="cinema-details">
+
+                    <span class="tag">
+                        IMAX
+                    </span>
+
+                    <span class="tag">
+                        4K
+                    </span>
+
+                    <span class="tag">
+                        Premium
+                    </span>
+
+                </div>
+
+                <div class="shows">
+
+                    <span>
+                        Today's Shows
+                    </span>
+
+                    <span>
+                        ● 5 Shows Available
+                    </span>
+
+                </div>
+
+                <button
+                    class="select-cinema"
+                    onclick="selectCinema('Luxe Cinemas')">
+
+                    Select Cinema
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- CINEMA 6 -->
+
+        <div class="cinema-card">
+
+            <div class="cinema-image">
+
+                <img
+                    src="vetri.jpg"
+                    alt="Vettri Cinemas">
+
+            </div>
+
+            <div class="cinema-info">
+
+                <h2>
+                    Vettri Cinemas
+                </h2>
+
+                <div class="cinema-location">
+                    📍 Chromepet, Chennai
+                </div>
+
+                <div class="cinema-details">
+
+                    <span class="tag">
+                        4K
+                    </span>
+
+                    <span class="tag">
+                        Dolby
+                    </span>
+
+                    <span class="tag">
+                        2D
+                    </span>
+
+                </div>
+
+                <div class="shows">
+
+                    <span>
+                        Today's Shows
+                    </span>
+
+                    <span>
+                        ● 6 Shows Available
+                    </span>
+
+                </div>
+
+                <button
+                    class="select-cinema"
+                    onclick="selectCinema('Vettri Cinemas')">
+
+                    Select Cinema
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+        © 2026 <span>MovieBook</span> |
+        Movie Ticket Booking System |
+        Internship Project
+    </p>
+
+</footer>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+    // Show selected movie from movies.html
+
+    const selectedMovie =
+        localStorage.getItem("selectedMovie");
+
+    if (selectedMovie) {
+
+        document.getElementById("movieName").textContent =
+            selectedMovie;
+
+    }
+
+
+    // Select cinema
+
+    function selectCinema(cinemaName) {
+
+        localStorage.setItem(
+            "selectedCinema",
+            cinemaName
+        );
+
+        window.location.href =
+            "showtime.html";
+
+    }
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MovieBook - Movie Ticket Booking</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#07090d;
+    color:white;
+}
+
+header{
+    height:70px;
+    background:#080a0f;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 7%;
+    border-bottom:1px solid #222;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:bold;
+}
+
+.logo span,
+.hero span,
+.welcome span,
+footer span{
+    color:#e50914;
+}
+
+nav ul{
+    display:flex;
+    gap:30px;
+    list-style:none;
+}
+
+nav a{
+    color:#ccc;
+    text-decoration:none;
+    font-size:14px;
+}
+
+nav a:hover,
+nav a.active{
+    color:#e50914;
+}
+
+.hero{
+    min-height:500px;
+    display:flex;
+    align-items:center;
+    padding:0 7%;
+    background:linear-gradient(90deg,#030509,#10141c,#07090d);
+}
+
+.hero-content{
+    max-width:600px;
+}
+
+.small-title{
+    color:#e50914;
+    font-size:12px;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    font-size:50px;
+    line-height:1.1;
+    margin-bottom:20px;
+}
+
+.hero p{
+    color:#aaa;
+    line-height:1.7;
+    margin-bottom:25px;
+}
+
+.book-btn{
+    display:inline-block;
+    background:#e50914;
+    color:white;
+    text-decoration:none;
+    padding:13px 22px;
+    border-radius:7px;
+}
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    padding:25px 7%;
+    background:#0b0e14;
+}
+
+.feature{
+    display:flex;
+    gap:12px;
+    align-items:center;
+}
+
+.feature-icon{
+    font-size:22px;
+}
+
+.feature h3{
+    font-size:14px;
+}
+
+.feature p{
+    color:#888;
+    font-size:11px;
+}
+
+.welcome{
+    text-align:center;
+    padding:60px 7%;
+}
+
+.section-tag{
+    color:#e50914;
+    font-size:12px;
+    margin-bottom:10px;
+}
+
+.welcome h2{
+    font-size:32px;
+    margin-bottom:15px;
+}
+
+.welcome p{
+    color:#999;
+    max-width:650px;
+    margin:auto;
+    line-height:1.7;
+}
+
+.steps{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+    padding:0 7% 60px;
+}
+
+.step-card{
+    background:#0d1016;
+    border:1px solid #222;
+    padding:25px;
+    border-radius:12px;
+}
+
+.step-number{
+    background:#e50914;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:15px;
+    font-weight:bold;
+}
+
+.step-card h3{
+    margin-bottom:8px;
+}
+
+.step-card p{
+    color:#888;
+    font-size:13px;
+    line-height:1.6;
+}
+
+footer{
+    text-align:center;
+    background:#05070a;
+    padding:25px;
+    color:#777;
+    font-size:12px;
+}
+
+@media(max-width:700px){
+
+    nav{
+        display:none;
+    }
+
+    .hero h1{
+        font-size:38px;
+    }
+
+    .features,
+    .steps{
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        🎬 Movie<span>Book</span>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="movies.html">Movies</a></li>
+            <li><a href="cinemas.html">Cinemas</a></li>
+            <li><a href="offers.html">Offers</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="snacks.html">Snacks</a></li>
+        </ul>
+    </nav>
+
+</header>
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="small-title">
+            ★ THE BEST MOVIE EXPERIENCE
+        </div>
+
+        <h1>
+            Book Your Favourite
+            <span>Movie</span>
+            Tickets Online
+        </h1>
+
+        <p>
+            Book movie tickets anytime, anywhere.
+            Choose your movie, select your seats
+            and enjoy the show.
+        </p>
+
+        <a href="movies.html" class="book-btn">
+            Book Tickets Now →
+        </a>
+
+    </div>
+
+</section>
+
+<section class="features">
+
+    <div class="feature">
+        <div class="feature-icon">🎟</div>
+        <div>
+            <h3>Easy Booking</h3>
+            <p>Book in a few clicks</p>
+        </div>
+    </div>
+
+    <div class="feature">
+        <div class="feature-icon">💺</div>
+        <div>
+            <h3>Best Seats</h3>
+            <p>Choose your seats</p>
+        </div>
+    </div>
+
+    <div class="feature">
+        <div class="feature-icon">🛡</div>
+        <div>
+            <h3>Secure Payment</h3>
+            <p>Safe transactions</p>
+        </div>
+    </div>
+
+    <div class="feature">
+        <div class="feature-icon">🎧</div>
+        <div>
+            <h3>24/7 Support</h3>
+            <p>Always here to help</p>
+        </div>
+    </div>
+
+</section>
+
+<section class="welcome">
+
+    <div class="section-tag">
+        Welcome to MovieBook
+    </div>
+
+    <h2>
+        Your <span>Movie</span> Experience Starts Here
+    </h2>
+
+    <p>
+        Discover movies, choose your cinema and seats,
+        and book your tickets online with a simple
+        and fast booking experience.
+    </p>
+
+</section>
+
+<section class="steps">
+
+    <div class="step-card">
+
+        <div class="step-number">01</div>
+
+        <h3>Choose Your Movie</h3>
+
+        <p>
+            Browse movies and select the movie
+            you want to watch.
+        </p>
+
+    </div>
+
+    <div class="step-card">
+
+        <div class="step-number">02</div>
+
+        <h3>Select Your Seats</h3>
+
+        <p>
+            Choose your cinema, showtime
+            and favourite seats.
+        </p>
+
+    </div>
+
+    <div class="step-card">
+
+        <div class="step-number">03</div>
+
+        <h3>Get Your Ticket</h3>
+
+        <p>
+            Complete payment and receive
+            your movie ticket.
+        </p>
+
+    </div>
+
+</section>
+
+<footer>
+
+    <p>
+        © 2026 <span>MovieBook</span> |
+        Movie Ticket Booking System |
+        Internship Project
+    </p>
+
+</footer>
+
+</body>
+</html>

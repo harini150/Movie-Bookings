@@ -1,0 +1,1131 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Select Seats - MovieBook</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#080808;
+    color:#fff;
+    min-height:100vh;
+}
+
+header{
+    height:80px;
+    background:#0d0d0d;
+    border-bottom:1px solid #252525;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 6%;
+}
+
+.logo{
+    color:#e50914;
+    font-size:26px;
+    font-weight:700;
+}
+
+nav a{
+    text-decoration:none;
+    color:#ddd;
+    margin-left:30px;
+    font-size:14px;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:#e50914;
+}
+
+.container{
+    width:92%;
+    max-width:1250px;
+    margin:35px auto 60px;
+}
+
+.booking-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.booking-header h1{
+    font-size:28px;
+}
+
+.booking-header p{
+    color:#888;
+    margin-top:6px;
+    font-size:14px;
+}
+
+.show-info{
+    text-align:right;
+}
+
+.show-info h3{
+    color:#e50914;
+    font-size:18px;
+}
+
+.show-info p{
+    color:#888;
+    font-size:13px;
+    margin-top:5px;
+}
+
+.screen-section{
+    text-align:center;
+    margin:35px 0 45px;
+}
+
+.screen{
+    width:70%;
+    height:45px;
+    margin:auto;
+    background:linear-gradient(to bottom,#f5f5f5,#666);
+    clip-path:polygon(7% 0,93% 0,100% 100%,0 100%);
+    color:#111;
+    padding-top:11px;
+    font-weight:600;
+    letter-spacing:2px;
+    box-shadow:0 0 30px rgba(229,9,20,.18);
+}
+
+.screen-label{
+    color:#666;
+    font-size:12px;
+    margin-top:10px;
+}
+
+.seat-layout{
+    background:#101010;
+    border:1px solid #292929;
+    border-radius:18px;
+    padding:40px 25px;
+    overflow-x:auto;
+}
+
+.section-title{
+    text-align:center;
+    color:#e50914;
+    font-size:14px;
+    font-weight:600;
+    letter-spacing:1.5px;
+    margin-bottom:22px;
+}
+
+.seat-row{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    margin-bottom:14px;
+    min-width:850px;
+}
+
+.row-label{
+    width:28px;
+    color:#777;
+    font-size:12px;
+    font-weight:600;
+    text-align:center;
+    margin-right:8px;
+}
+
+.seat{
+    width:35px;
+    height:31px;
+    background:#222;
+    border:1px solid #555;
+    color:#bbb;
+    border-radius:7px 7px 4px 4px;
+    cursor:pointer;
+    font-size:10px;
+    transition:.2s;
+}
+
+.seat:hover{
+    border-color:#e50914;
+    color:#fff;
+    transform:translateY(-2px);
+}
+
+.seat.selected{
+    background:#e50914;
+    border-color:#e50914;
+    color:#fff;
+    font-weight:700;
+    box-shadow:0 0 12px rgba(229,9,20,.35);
+}
+
+.seat.booked{
+    background:#4b4b4b;
+    border-color:#4b4b4b;
+    color:#1c1c1c;
+    cursor:not-allowed;
+}
+
+.gap{
+    width:25px;
+}
+
+.vip-title{
+    margin-top:38px;
+}
+
+.legend{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:32px;
+    margin:30px 0;
+    flex-wrap:wrap;
+}
+
+.legend-item{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color:#999;
+    font-size:13px;
+}
+
+.legend-box{
+    width:18px;
+    height:18px;
+    border-radius:4px;
+    background:#222;
+    border:1px solid #555;
+}
+
+.legend-box.selected{
+    background:#e50914;
+    border-color:#e50914;
+}
+
+.legend-box.booked{
+    background:#4b4b4b;
+    border-color:#4b4b4b;
+}
+
+.summary{
+    background:#101010;
+    border:1px solid #292929;
+    border-radius:16px;
+    padding:25px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:25px;
+}
+
+.summary-left{
+    flex:1;
+}
+
+.summary-left h3{
+    margin-bottom:10px;
+    font-size:17px;
+}
+
+.selected-list{
+    color:#999;
+    font-size:13px;
+    line-height:1.8;
+}
+
+.summary-right{
+    min-width:250px;
+    text-align:right;
+}
+
+.summary-right p{
+    color:#777;
+    font-size:13px;
+}
+
+.ticket-count{
+    color:#ccc;
+    font-size:13px;
+    margin:3px 0 10px;
+}
+
+.total{
+    color:#e50914;
+    font-size:27px;
+    font-weight:700;
+    margin:3px 0 15px;
+}
+
+.clear-btn{
+    background:transparent;
+    border:1px solid #444;
+    color:#aaa;
+    padding:10px 18px;
+    border-radius:7px;
+    cursor:pointer;
+    margin-right:7px;
+    transition:.3s;
+}
+
+.clear-btn:hover{
+    border-color:#e50914;
+    color:#e50914;
+}
+
+.continue-btn{
+    background:#e50914;
+    border:0;
+    color:#fff;
+    padding:12px 28px;
+    border-radius:7px;
+    font-size:14px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.continue-btn:hover{
+    background:#b20710;
+}
+
+.continue-btn:disabled{
+    background:#3a3a3a;
+    color:#777;
+    cursor:not-allowed;
+}
+
+@media(max-width:750px){
+
+    header{
+        padding:0 4%;
+    }
+
+    nav a{
+        margin-left:10px;
+        font-size:11px;
+    }
+
+    .booking-header{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:15px;
+    }
+
+    .show-info{
+        text-align:left;
+    }
+
+    .screen{
+        width:90%;
+    }
+
+    .seat-layout{
+        padding:30px 10px;
+    }
+
+    .summary{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .summary-right{
+        text-align:left;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        🎬 MovieBook
+    </div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="movies.html">Movies</a>
+        <a href="cinemas.html">Cinemas</a>
+    </nav>
+
+</header>
+
+
+<div class="container">
+
+    <div class="booking-header">
+
+        <div>
+            <h1>Select Your Seats</h1>
+            <p>Choose your preferred seats for your movie</p>
+        </div>
+
+        <div class="show-info">
+
+            <h3 id="movieName">
+                Movie Booking
+            </h3>
+
+            <p id="showDetails">
+                Today • 7:30 PM
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="screen-section">
+
+        <div class="screen">
+            SCREEN
+        </div>
+
+        <div class="screen-label">
+            All eyes this way
+        </div>
+
+    </div>
+
+
+    <div class="seat-layout">
+
+
+        <!-- PREMIUM SECTION -->
+
+        <div class="section-title">
+            PREMIUM
+        </div>
+
+
+        <div class="seat-row">
+
+            <div class="row-label">A</div>
+
+            <button class="seat" data-seat="A1">1</button>
+            <button class="seat" data-seat="A2">2</button>
+            <button class="seat" data-seat="A3">3</button>
+            <button class="seat" data-seat="A4">4</button>
+            <button class="seat" data-seat="A5">5</button>
+
+            <div class="gap"></div>
+
+            <button class="seat" data-seat="A6">6</button>
+            <button class="seat" data-seat="A7">7</button>
+            <button class="seat" data-seat="A8">8</button>
+            <button class="seat" data-seat="A9">9</button>
+            <button class="seat" data-seat="A10">10</button>
+
+        </div>
+
+
+        <div class="seat-row">
+
+            <div class="row-label">B</div>
+
+            <button class="seat" data-seat="B1">1</button>
+            <button class="seat" data-seat="B2">2</button>
+            <button class="seat" data-seat="B3">3</button>
+            <button class="seat" data-seat="B4">4</button>
+            <button class="seat" data-seat="B5">5</button>
+
+            <div class="gap"></div>
+
+            <button class="seat" data-seat="B6">6</button>
+            <button class="seat" data-seat="B7">7</button>
+            <button class="seat" data-seat="B8">8</button>
+            <button class="seat" data-seat="B9">9</button>
+            <button class="seat" data-seat="B10">10</button>
+
+        </div>
+
+
+        <div class="seat-row">
+
+            <div class="row-label">C</div>
+
+            <button class="seat" data-seat="C1">1</button>
+            <button class="seat" data-seat="C2">2</button>
+            <button class="seat" data-seat="C3">3</button>
+            <button class="seat" data-seat="C4">4</button>
+            <button class="seat" data-seat="C5">5</button>
+
+            <div class="gap"></div>
+
+            <button class="seat" data-seat="C6">6</button>
+            <button class="seat" data-seat="C7">7</button>
+            <button class="seat" data-seat="C8">8</button>
+            <button class="seat" data-seat="C9">9</button>
+            <button class="seat" data-seat="C10">10</button>
+
+        </div>
+
+
+        <div class="seat-row">
+
+            <div class="row-label">D</div>
+
+            <button class="seat" data-seat="D1">1</button>
+            <button class="seat" data-seat="D2">2</button>
+            <button class="seat" data-seat="D3">3</button>
+            <button class="seat" data-seat="D4">4</button>
+            <button class="seat" data-seat="D5">5</button>
+
+            <div class="gap"></div>
+
+            <button class="seat" data-seat="D6">6</button>
+            <button class="seat" data-seat="D7">7</button>
+            <button class="seat" data-seat="D8">8</button>
+            <button class="seat" data-seat="D9">9</button>
+            <button class="seat" data-seat="D10">10</button>
+
+        </div>
+
+
+        <div class="seat-row">
+
+            <div class="row-label">E</div>
+
+            <button class="seat" data-seat="E1">1</button>
+            <button class="seat" data-seat="E2">2</button>
+            <button class="seat" data-seat="E3">3</button>
+            <button class="seat" data-seat="E4">4</button>
+            <button class="seat" data-seat="E5">5</button>
+
+            <div class="gap"></div>
+
+            <button class="seat" data-seat="E6">6</button>
+            <button class="seat" data-seat="E7">7</button>
+            <button class="seat" data-seat="E8">8</button>
+            <button class="seat" data-seat="E9">9</button>
+            <button class="seat" data-seat="E10">10</button>
+
+        </div>
+
+
+        <div class="seat-row">
+
+            <div class="row-label">F</div>
+
+            <button class="seat" data-seat="F1">1</button>
+            <button class="seat" data-seat="F2">2</button>
+            <button class="seat" data-seat="F3">3</button>
+            <button class="seat" data-seat="F4">4</button>
+            <button class="seat" data-seat="F5">5</button>
+
+            <div class="gap"></div>
+
+            <button class="seat" data-seat="F6">6</button>
+            <button class="seat" data-seat="F7">7</button>
+            <button class="seat" data-seat="F8">8</button>
+            <button class="seat" data-seat="F9">9</button>
+            <button class="seat" data-seat="F10">10</button>
+
+        </div>
+
+
+        <!-- GOLD SECTION -->
+
+        <div class="section-title vip-title">
+            GOLD
+        </div>
+
+
+        <div class="seat-row">
+
+            <div class="row-label">G</div>
+
+            <button class="seat" data-seat="G1">1</button>
+            <button class="seat" data-seat="G2">2</button>
+            <button class="seat" data-seat="G3">3</button>
+            <button class="seat" data-seat="G4">4</button>
+            <button class="seat" data-seat="G5">5</button>
+
+            <div class="gap"></div>
+
+            <button class="seat" data-seat="G6">6</button>
+            <button class="seat" data-seat="G7">7</button>
+            <button class="seat" data-seat="G8">8</button>
+            <button class="seat" data-seat="G9">9</button>
+            <button class="seat" data-seat="G10">10</button>
+
+        </div>
+
+
+        <div class="seat-row">
+
+            <div class="row-label">H</div>
+
+            <button class="seat" data-seat="H1">1</button>
+            <button class="seat" data-seat="H2">2</button>
+            <button class="seat" data-seat="H3">3</button>
+            <button class="seat" data-seat="H4">4</button>
+            <button class="seat" data-seat="H5">5</button>
+
+            <div class="gap"></div>
+
+            <button class="seat" data-seat="H6">6</button>
+            <button class="seat" data-seat="H7">7</button>
+            <button class="seat" data-seat="H8">8</button>
+            <button class="seat" data-seat="H9">9</button>
+            <button class="seat" data-seat="H10">10</button>
+
+        </div>
+
+
+        <div class="seat-row">
+
+            <div class="row-label">I</div>
+
+            <button class="seat" data-seat="I1">1</button>
+            <button class="seat" data-seat="I2">2</button>
+            <button class="seat" data-seat="I3">3</button>
+            <button class="seat" data-seat="I4">4</button>
+            <button class="seat" data-seat="I5">5</button>
+
+            <div class="gap"></div>
+
+            <button class="seat" data-seat="I6">6</button>
+            <button class="seat" data-seat="I7">7</button>
+            <button class="seat" data-seat="I8">8</button>
+            <button class="seat" data-seat="I9">9</button>
+            <button class="seat" data-seat="I10">10</button>
+
+        </div>
+
+
+        <div class="seat-row">
+
+            <div class="row-label">J</div>
+
+            <button class="seat" data-seat="J1">1</button>
+            <button class="seat" data-seat="J2">2</button>
+            <button class="seat" data-seat="J3">3</button>
+            <button class="seat" data-seat="J4">4</button>
+            <button class="seat" data-seat="J5">5</button>
+
+            <div class="gap"></div>
+
+            <button class="seat" data-seat="J6">6</button>
+            <button class="seat" data-seat="J7">7</button>
+            <button class="seat" data-seat="J8">8</button>
+            <button class="seat" data-seat="J9">9</button>
+            <button class="seat" data-seat="J10">10</button>
+
+        </div>
+
+
+        <div class="seat-row">
+
+            <div class="row-label">K</div>
+
+            <button class="seat" data-seat="K1">1</button>
+            <button class="seat" data-seat="K2">2</button>
+            <button class="seat" data-seat="K3">3</button>
+            <button class="seat" data-seat="K4">4</button>
+            <button class="seat" data-seat="K5">5</button>
+
+            <div class="gap"></div>
+
+            <button class="seat" data-seat="K6">6</button>
+            <button class="seat" data-seat="K7">7</button>
+            <button class="seat" data-seat="K8">8</button>
+            <button class="seat" data-seat="K9">9</button>
+            <button class="seat" data-seat="K10">10</button>
+
+        </div>
+
+
+        <div class="seat-row">
+
+            <div class="row-label">L</div>
+
+            <button class="seat" data-seat="L1">1</button>
+            <button class="seat" data-seat="L2">2</button>
+            <button class="seat" data-seat="L3">3</button>
+            <button class="seat" data-seat="L4">4</button>
+            <button class="seat" data-seat="L5">5</button>
+
+            <div class="gap"></div>
+
+            <button class="seat" data-seat="L6">6</button>
+            <button class="seat" data-seat="L7">7</button>
+            <button class="seat" data-seat="L8">8</button>
+            <button class="seat" data-seat="L9">9</button>
+            <button class="seat" data-seat="L10">10</button>
+
+        </div>
+
+
+        <!-- SILVER SECTION -->
+
+        <div class="section-title vip-title">
+            SILVER
+        </div>
+
+
+        <div class="seat-row">
+
+            <div class="row-label">M</div>
+
+            <button class="seat" data-seat="M1">1</button>
+            <button class="seat" data-seat="M2">2</button>
+            <button class="seat" data-seat="M3">3</button>
+            <button class="seat" data-seat="M4">4</button>
+            <button class="seat" data-seat="M5">5</button>
+
+            <div class="gap"></div>
+
+            <button class="seat" data-seat="M6">6</button>
+            <button class="seat" data-seat="M7">7</button>
+            <button class="seat" data-seat="M8">8</button>
+            <button class="seat" data-seat="M9">9</button>
+            <button class="seat" data-seat="M10">10</button>
+
+        </div>
+
+
+        <div class="seat-row">
+
+            <div class="row-label">N</div>
+
+            <button class="seat" data-seat="N1">1</button>
+            <button class="seat" data-seat="N2">2</button>
+            <button class="seat" data-seat="N3">3</button>
+            <button class="seat" data-seat="N4">4</button>
+            <button class="seat" data-seat="N5">5</button>
+
+            <div class="gap"></div>
+
+            <button class="seat" data-seat="N6">6</button>
+            <button class="seat" data-seat="N7">7</button>
+            <button class="seat" data-seat="N8">8</button>
+            <button class="seat" data-seat="N9">9</button>
+            <button class="seat" data-seat="N10">10</button>
+
+        </div>
+
+
+        <div class="seat-row">
+
+            <div class="row-label">O</div>
+
+            <button class="seat" data-seat="O1">1</button>
+            <button class="seat" data-seat="O2">2</button>
+            <button class="seat" data-seat="O3">3</button>
+            <button class="seat" data-seat="O4">4</button>
+            <button class="seat" data-seat="O5">5</button>
+
+            <div class="gap"></div>
+
+            <button class="seat" data-seat="O6">6</button>
+            <button class="seat" data-seat="O7">7</button>
+            <button class="seat" data-seat="O8">8</button>
+            <button class="seat" data-seat="O9">9</button>
+            <button class="seat" data-seat="O10">10</button>
+
+        </div>
+
+
+        <div class="seat-row">
+
+            <div class="row-label">P</div>
+
+            <button class="seat" data-seat="P1">1</button>
+            <button class="seat" data-seat="P2">2</button>
+            <button class="seat" data-seat="P3">3</button>
+            <button class="seat" data-seat="P4">4</button>
+            <button class="seat" data-seat="P5">5</button>
+
+            <div class="gap"></div>
+
+            <button class="seat" data-seat="P6">6</button>
+            <button class="seat" data-seat="P7">7</button>
+            <button class="seat" data-seat="P8">8</button>
+            <button class="seat" data-seat="P9">9</button>
+            <button class="seat" data-seat="P10">10</button>
+
+        </div>
+
+
+        <div class="seat-row">
+
+            <div class="row-label">Q</div>
+
+            <button class="seat" data-seat="Q1">1</button>
+            <button class="seat" data-seat="Q2">2</button>
+            <button class="seat" data-seat="Q3">3</button>
+            <button class="seat" data-seat="Q4">4</button>
+            <button class="seat" data-seat="Q5">5</button>
+
+            <div class="gap"></div>
+
+            <button class="seat" data-seat="Q6">6</button>
+            <button class="seat" data-seat="Q7">7</button>
+            <button class="seat" data-seat="Q8">8</button>
+            <button class="seat" data-seat="Q9">9</button>
+            <button class="seat" data-seat="Q10">10</button>
+
+        </div>
+
+    </div>
+
+
+    <div class="legend">
+
+        <div class="legend-item">
+            <div class="legend-box"></div>
+            Available
+        </div>
+
+        <div class="legend-item">
+            <div class="legend-box selected"></div>
+            Selected
+        </div>
+
+        <div class="legend-item">
+            <div class="legend-box booked"></div>
+            Sold
+        </div>
+
+    </div>
+
+
+    <div class="summary">
+
+        <div class="summary-left">
+
+            <h3>Booking Summary</h3>
+
+            <div
+                class="selected-list"
+                id="selectedSeats">
+
+                No seats selected
+
+            </div>
+
+        </div>
+
+
+        <div class="summary-right">
+
+            <p>Tickets</p>
+
+            <div
+                class="ticket-count"
+                id="ticketCount">
+
+                0 Tickets
+
+            </div>
+
+            <p>Total Amount</p>
+
+            <div
+                class="total"
+                id="totalAmount">
+
+                ₹0
+
+            </div>
+
+
+            <button
+                class="clear-btn"
+                onclick="clearSeats()">
+
+                Clear
+
+            </button>
+
+
+            <button
+                class="continue-btn"
+                id="continueBtn"
+                disabled
+                onclick="continueBooking()">
+
+                Continue
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const seats =
+    document.querySelectorAll(".seat");
+
+const selectedSeatsElement =
+    document.getElementById("selectedSeats");
+
+const ticketCountElement =
+    document.getElementById("ticketCount");
+
+const totalAmountElement =
+    document.getElementById("totalAmount");
+
+const continueButton =
+    document.getElementById("continueBtn");
+
+
+let selectedSeats = [];
+
+const ticketPrice = 180;
+
+
+/* Already booked seats */
+
+const bookedSeats = [
+
+    "A3","A4","A8",
+    "B2","B7","B10",
+    "C4","C9",
+    "D1","D6",
+    "E5","E8",
+    "F3","F10",
+
+    "G2","G6","G9",
+    "H4","H8",
+    "I1","I7",
+    "J3","J9",
+    "K5","K10",
+    "L2","L7",
+
+    "M4","M8",
+    "N1","N6",
+    "O3","O9",
+    "P5","P10",
+    "Q2","Q7"
+
+];
+
+
+/* Mark booked seats */
+
+seats.forEach(function(seat){
+
+    const seatNumber =
+        seat.getAttribute("data-seat");
+
+    if(bookedSeats.includes(seatNumber)){
+
+        seat.classList.add("booked");
+
+        seat.disabled = true;
+
+    }
+
+});
+
+
+/* Seat selection */
+
+seats.forEach(function(seat){
+
+    seat.addEventListener(
+        "click",
+        function(){
+
+            if(
+                seat.classList.contains("booked")
+            ){
+                return;
+            }
+
+
+            const seatNumber =
+                seat.getAttribute("data-seat");
+
+
+            if(
+                seat.classList.contains("selected")
+            ){
+
+                seat.classList.remove("selected");
+
+                selectedSeats =
+                    selectedSeats.filter(
+                        function(item){
+
+                            return item !== seatNumber;
+
+                        }
+                    );
+
+            }
+
+            else{
+
+                seat.classList.add("selected");
+
+                selectedSeats.push(
+                    seatNumber
+                );
+
+            }
+
+
+            updateBooking();
+
+        }
+    );
+
+});
+
+
+/* Update booking summary */
+
+function updateBooking(){
+
+    if(selectedSeats.length === 0){
+
+        selectedSeatsElement.innerText =
+            "No seats selected";
+
+        ticketCountElement.innerText =
+            "0 Tickets";
+
+        totalAmountElement.innerText =
+            "₹0";
+
+        continueButton.disabled = true;
+
+        return;
+
+    }
+
+
+    selectedSeatsElement.innerText =
+        "Selected Seats: " +
+        selectedSeats.join(", ");
+
+
+    ticketCountElement.innerText =
+        selectedSeats.length +
+        (
+            selectedSeats.length === 1
+            ? " Ticket"
+            : " Tickets"
+        );
+
+
+    const total =
+        selectedSeats.length *
+        ticketPrice;
+
+
+    totalAmountElement.innerText =
+        "₹" + total;
+
+
+    continueButton.disabled = false;
+
+}
+
+
+/* Clear selected seats */
+
+function clearSeats(){
+
+    selectedSeats = [];
+
+
+    seats.forEach(function(seat){
+
+        seat.classList.remove(
+            "selected"
+        );
+
+    });
+
+
+    updateBooking();
+
+}
+
+
+/* Continue to payment */
+
+function continueBooking(){
+
+    if(selectedSeats.length === 0){
+
+        alert(
+            "Please select at least one seat."
+        );
+
+        return;
+
+    }
+
+
+    const total =
+        selectedSeats.length *
+        ticketPrice;
+
+
+    localStorage.setItem(
+        "selectedSeats",
+        JSON.stringify(selectedSeats)
+    );
+
+
+    localStorage.setItem(
+        "ticketPrice",
+        ticketPrice
+    );
+
+
+    localStorage.setItem(
+        "totalAmount",
+        total
+    );
+
+
+    localStorage.setItem(
+        "seatCount",
+        selectedSeats.length
+    );
+
+
+    window.location.href =
+        "payment.html";
+
+}
+
+</script>
+
+</body>
+</html>
+

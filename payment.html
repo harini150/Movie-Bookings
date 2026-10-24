@@ -1,0 +1,1035 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Payment - MovieBook</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#080808;
+    color:#fff;
+    min-height:100vh;
+}
+
+header{
+    height:80px;
+    background:#0d0d0d;
+    border-bottom:1px solid #292929;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 6%;
+}
+
+.logo{
+    color:#e50914;
+    font-size:26px;
+    font-weight:700;
+}
+
+nav a{
+    color:#ddd;
+    text-decoration:none;
+    margin-left:30px;
+    font-size:14px;
+    transition:.3s;
+}
+
+nav a:hover{
+    color:#e50914;
+}
+
+.container{
+    width:92%;
+    max-width:1100px;
+    margin:40px auto 60px;
+}
+
+.title{
+    margin-bottom:30px;
+}
+
+.title h1{
+    font-size:28px;
+}
+
+.title p{
+    color:#888;
+    font-size:14px;
+    margin-top:6px;
+}
+
+.payment-layout{
+    display:grid;
+    grid-template-columns:1fr 380px;
+    gap:25px;
+}
+
+.payment-card,
+.summary-card{
+    background:#111;
+    border:1px solid #292929;
+    border-radius:16px;
+    padding:30px;
+}
+
+.payment-card h2,
+.summary-card h2{
+    font-size:19px;
+    margin-bottom:25px;
+}
+
+.payment-method{
+    border:1px solid #333;
+    border-radius:9px;
+    padding:15px;
+    margin-bottom:12px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.payment-method:hover{
+    border-color:#e50914;
+}
+
+.payment-method.active{
+    border-color:#e50914;
+    background:#180909;
+}
+
+.payment-method input{
+    accent-color:#e50914;
+}
+
+.form-section{
+    margin-top:25px;
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+.form-group label{
+    display:block;
+    color:#aaa;
+    font-size:13px;
+    margin-bottom:7px;
+}
+
+.form-group input,
+.form-group select{
+    width:100%;
+    padding:13px 14px;
+    background:#1b1b1b;
+    color:#fff;
+    border:1px solid #333;
+    border-radius:7px;
+    outline:none;
+    font-size:13px;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+    border-color:#e50914;
+}
+
+.form-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.pay-btn{
+    width:100%;
+    padding:14px;
+    margin-top:8px;
+    border:0;
+    border-radius:8px;
+    background:#e50914;
+    color:#fff;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.pay-btn:hover{
+    background:#b20710;
+}
+
+.movie-info{
+    border-bottom:1px solid #292929;
+    padding-bottom:20px;
+    margin-bottom:20px;
+}
+
+.movie-info h3{
+    color:#e50914;
+    font-size:18px;
+    margin-bottom:8px;
+}
+
+.movie-info p{
+    color:#888;
+    font-size:13px;
+    line-height:1.9;
+}
+
+.summary-row{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    margin:14px 0;
+    font-size:13px;
+}
+
+.summary-row span:first-child{
+    color:#888;
+}
+
+.summary-row span:last-child{
+    color:#eee;
+    text-align:right;
+}
+
+.total-row{
+    border-top:1px solid #292929;
+    margin-top:20px;
+    padding-top:20px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.total-row span:first-child{
+    color:#aaa;
+}
+
+.total{
+    color:#e50914;
+    font-size:25px;
+    font-weight:700;
+}
+
+.secure{
+    text-align:center;
+    color:#666;
+    font-size:11px;
+    margin-top:20px;
+}
+
+.back-btn{
+    background:transparent;
+    color:#aaa;
+    border:1px solid #444;
+    padding:11px 20px;
+    border-radius:7px;
+    cursor:pointer;
+    margin-top:12px;
+    width:100%;
+}
+
+.back-btn:hover{
+    border-color:#e50914;
+    color:#e50914;
+}
+
+@media(max-width:800px){
+
+    .payment-layout{
+        grid-template-columns:1fr;
+    }
+
+    .summary-card{
+        order:-1;
+    }
+
+}
+
+@media(max-width:500px){
+
+    header{
+        padding:0 4%;
+    }
+
+    nav a{
+        margin-left:10px;
+        font-size:11px;
+    }
+
+    .payment-card,
+    .summary-card{
+        padding:22px;
+    }
+
+    .form-row{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+        🎬 MovieBook
+    </div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="movies.html">Movies</a>
+        <a href="cinemas.html">Cinemas</a>
+    </nav>
+
+</header>
+
+
+<div class="container">
+
+
+    <div class="title">
+
+        <h1>Complete Your Payment</h1>
+
+        <p>
+            Securely complete your movie ticket booking
+        </p>
+
+    </div>
+
+
+    <div class="payment-layout">
+
+
+        <!-- PAYMENT CARD -->
+
+        <div class="payment-card">
+
+            <h2>Choose Payment Method</h2>
+
+
+            <label
+                class="payment-method active"
+                onclick="selectMethod('card',this)">
+
+                <input
+                    type="radio"
+                    name="paymentMethod"
+                    checked>
+
+                💳 Credit / Debit Card
+
+            </label>
+
+
+            <label
+                class="payment-method"
+                onclick="selectMethod('upi',this)">
+
+                <input
+                    type="radio"
+                    name="paymentMethod">
+
+                📱 UPI Payment
+
+            </label>
+
+
+            <label
+                class="payment-method"
+                onclick="selectMethod('netbanking',this)">
+
+                <input
+                    type="radio"
+                    name="paymentMethod">
+
+                🏦 Net Banking
+
+            </label>
+
+
+            <!-- CARD FORM -->
+
+            <div
+                class="form-section"
+                id="cardForm">
+
+
+                <div class="form-group">
+
+                    <label>
+                        Card Holder Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="cardName"
+                        placeholder="Enter card holder name">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Card Number
+                    </label>
+
+                    <input
+                        type="text"
+                        id="cardNumber"
+                        maxlength="19"
+                        placeholder="1234 5678 9012 3456">
+
+                </div>
+
+
+                <div class="form-row">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Expiry Date
+                        </label>
+
+                        <input
+                            type="text"
+                            id="expiry"
+                            maxlength="5"
+                            placeholder="MM/YY">
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            CVV
+                        </label>
+
+                        <input
+                            type="password"
+                            id="cvv"
+                            maxlength="3"
+                            placeholder="•••">
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- UPI FORM -->
+
+            <div
+                class="form-section"
+                id="upiForm"
+                style="display:none;">
+
+                <div class="form-group">
+
+                    <label>
+                        UPI ID
+                    </label>
+
+                    <input
+                        type="text"
+                        id="upiId"
+                        placeholder="example@upi">
+
+                </div>
+
+            </div>
+
+
+            <!-- NET BANKING FORM -->
+
+            <div
+                class="form-section"
+                id="bankForm"
+                style="display:none;">
+
+                <div class="form-group">
+
+                    <label>
+                        Select Bank
+                    </label>
+
+                    <select id="bank">
+
+                        <option value="">
+                            Select your bank
+                        </option>
+
+                        <option>
+                            State Bank of India
+                        </option>
+
+                        <option>
+                            HDFC Bank
+                        </option>
+
+                        <option>
+                            ICICI Bank
+                        </option>
+
+                        <option>
+                            Axis Bank
+                        </option>
+
+                        <option>
+                            Kotak Mahindra Bank
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="pay-btn"
+                onclick="makePayment()">
+
+                Pay ₹<span id="payAmount">0</span>
+
+            </button>
+
+
+            <button
+                class="back-btn"
+                onclick="goBack()">
+
+                ← Back to Seats
+
+            </button>
+
+
+            <div class="secure">
+                🔒 Secure payment • Your information is protected
+            </div>
+
+        </div>
+
+
+
+        <!-- BOOKING SUMMARY -->
+
+        <div class="summary-card">
+
+            <h2>Booking Summary</h2>
+
+
+            <div class="movie-info">
+
+                <h3 id="movieName">
+                    MovieBook
+                </h3>
+
+                <p>
+                    Cinema: PVR INOX
+                    <br>
+
+                    Date: Today
+                    <br>
+
+                    Time: 7:30 PM
+                </p>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Selected Seats
+                </span>
+
+                <span id="selectedSeats">
+                    -
+                </span>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Tickets
+                </span>
+
+                <span id="ticketCount">
+                    0
+                </span>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Ticket Price
+                </span>
+
+                <span id="ticketPrice">
+                    ₹0
+                </span>
+
+            </div>
+
+
+            <div class="summary-row">
+
+                <span>
+                    Convenience Fee
+                </span>
+
+                <span>
+                    ₹0
+                </span>
+
+            </div>
+
+
+            <div class="total-row">
+
+                <span>
+                    Total Amount
+                </span>
+
+                <span
+                    class="total"
+                    id="totalAmount">
+
+                    ₹0
+
+                </span>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+/* Get booking data */
+
+let selectedSeats =
+    JSON.parse(
+        localStorage.getItem("selectedSeats")
+    ) || [];
+
+
+let ticketPrice =
+    Number(
+        localStorage.getItem("ticketPrice")
+    ) || 180;
+
+
+let totalAmount =
+    Number(
+        localStorage.getItem("totalAmount")
+    ) ||
+    selectedSeats.length * ticketPrice;
+
+
+
+/* Display booking information */
+
+document.getElementById(
+    "selectedSeats"
+).innerText =
+
+    selectedSeats.length > 0
+    ? selectedSeats.join(", ")
+    : "No seats selected";
+
+
+document.getElementById(
+    "ticketCount"
+).innerText =
+
+    selectedSeats.length;
+
+
+document.getElementById(
+    "ticketPrice"
+).innerText =
+
+    "₹" + ticketPrice;
+
+
+document.getElementById(
+    "totalAmount"
+).innerText =
+
+    "₹" + totalAmount;
+
+
+document.getElementById(
+    "payAmount"
+).innerText =
+
+    totalAmount;
+
+
+
+/* Payment method selection */
+
+let selectedMethod = "card";
+
+
+function selectMethod(method,element){
+
+    selectedMethod = method;
+
+
+    document
+        .querySelectorAll(".payment-method")
+        .forEach(function(item){
+
+            item.classList.remove("active");
+
+        });
+
+
+    element.classList.add("active");
+
+
+    document.getElementById(
+        "cardForm"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "upiForm"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "bankForm"
+    ).style.display = "none";
+
+
+    if(method === "card"){
+
+        document.getElementById(
+            "cardForm"
+        ).style.display = "block";
+
+    }
+
+
+    if(method === "upi"){
+
+        document.getElementById(
+            "upiForm"
+        ).style.display = "block";
+
+    }
+
+
+    if(method === "netbanking"){
+
+        document.getElementById(
+            "bankForm"
+        ).style.display = "block";
+
+    }
+
+}
+
+
+
+/* Card number formatting */
+
+document
+    .getElementById("cardNumber")
+    .addEventListener(
+        "input",
+        function(){
+
+            let value =
+                this.value
+                .replace(/\D/g,"")
+                .substring(0,16);
+
+
+            let groups =
+                value.match(/.{1,4}/g);
+
+
+            this.value =
+                groups
+                ? groups.join(" ")
+                : "";
+
+        }
+    );
+
+
+
+/* Expiry date formatting */
+
+document
+    .getElementById("expiry")
+    .addEventListener(
+        "input",
+        function(){
+
+            let value =
+                this.value
+                .replace(/\D/g,"")
+                .substring(0,4);
+
+
+            if(value.length > 2){
+
+                value =
+                    value.substring(0,2)
+                    + "/"
+                    + value.substring(2);
+
+            }
+
+
+            this.value = value;
+
+        }
+    );
+
+
+
+/* Payment validation */
+
+function makePayment(){
+
+
+    if(selectedSeats.length === 0){
+
+        alert(
+            "No seats selected. Please select your seats."
+        );
+
+        window.location.href =
+            "seats.html";
+
+        return;
+
+    }
+
+
+    if(selectedMethod === "card"){
+
+        let name =
+            document
+            .getElementById("cardName")
+            .value.trim();
+
+
+        let cardNumber =
+            document
+            .getElementById("cardNumber")
+            .value
+            .replace(/\s/g,"");
+
+
+        let expiry =
+            document
+            .getElementById("expiry")
+            .value.trim();
+
+
+        let cvv =
+            document
+            .getElementById("cvv")
+            .value.trim();
+
+
+        if(name === ""){
+
+            alert(
+                "Please enter card holder name."
+            );
+
+            return;
+
+        }
+
+
+        if(cardNumber.length !== 16){
+
+            alert(
+                "Please enter a valid card number."
+            );
+
+            return;
+
+        }
+
+
+        if(expiry.length !== 5){
+
+            alert(
+                "Please enter expiry date."
+            );
+
+            return;
+
+        }
+
+
+        if(cvv.length !== 3){
+
+            alert(
+                "Please enter a valid CVV."
+            );
+
+            return;
+
+        }
+
+    }
+
+
+
+    if(selectedMethod === "upi"){
+
+        let upi =
+            document
+            .getElementById("upiId")
+            .value.trim();
+
+
+        if(
+            upi === "" ||
+            !upi.includes("@")
+        ){
+
+            alert(
+                "Please enter a valid UPI ID."
+            );
+
+            return;
+
+        }
+
+    }
+
+
+
+    if(selectedMethod === "netbanking"){
+
+        let bank =
+            document
+            .getElementById("bank")
+            .value;
+
+
+        if(bank === ""){
+
+            alert(
+                "Please select your bank."
+            );
+
+            return;
+
+        }
+
+    }
+
+
+
+    /* Generate booking ID */
+
+    let bookingId =
+        "MB" +
+        Math.floor(
+            100000 +
+            Math.random() * 900000
+        );
+
+
+    localStorage.setItem(
+        "bookingId",
+        bookingId
+    );
+
+
+    localStorage.setItem(
+        "paymentMethod",
+        selectedMethod
+    );
+
+
+    localStorage.setItem(
+        "bookingStatus",
+        "Payment Successful"
+    );
+
+
+    localStorage.setItem(
+        "bookingDate",
+        new Date().toLocaleDateString()
+    );
+
+
+    /* Go to success page */
+
+    window.location.href =
+        "success.html";
+
+}
+
+
+
+/* Back to seats */
+
+function goBack(){
+
+    window.location.href =
+        "seats.html";
+
+}
+
+</script>
+
+</body>
+</html>
+```

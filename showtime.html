@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Select Showtime - MovieBook</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#07090d;
+    color:#fff;
+}
+
+/* NAVBAR */
+
+header{
+    height:76px;
+    background:#080a0f;
+    border-bottom:1px solid #1d2129;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 5%;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:700;
+}
+
+.logo span{
+    color:#e50914;
+}
+
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:28px;
+}
+
+nav a{
+    color:#aaaeb7;
+    text-decoration:none;
+    font-size:13px;
+}
+
+nav a:hover{
+    color:#e50914;
+}
+
+.nav-buttons{
+    display:flex;
+    gap:10px;
+}
+
+.login{
+    padding:9px 17px;
+    background:transparent;
+    color:#fff;
+    border:1px solid #343943;
+    border-radius:7px;
+}
+
+.signup{
+    padding:10px 19px;
+    background:#e50914;
+    color:#fff;
+    border:none;
+    border-radius:7px;
+    font-weight:600;
+}
+
+
+/* HEADER */
+
+.page-header{
+    text-align:center;
+    padding:45px 20px 25px;
+}
+
+.step{
+    display:inline-block;
+    padding:6px 14px;
+    border-radius:20px;
+    background:rgba(229,9,20,.12);
+    border:1px solid rgba(229,9,20,.35);
+    color:#ff4b52;
+    font-size:10px;
+    font-weight:600;
+}
+
+.page-header h1{
+    font-size:32px;
+    margin:13px 0 7px;
+}
+
+.page-header p{
+    color:#858b95;
+    font-size:12px;
+}
+
+.page-header strong{
+    color:#fff;
+}
+
+
+/* PROGRESS */
+
+.progress{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:10px auto 35px;
+}
+
+.circle{
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#e50914;
+    font-size:11px;
+    font-weight:600;
+}
+
+.line{
+    width:70px;
+    height:2px;
+    background:#e50914;
+}
+
+
+/* MAIN */
+
+.main{
+    width:90%;
+    max-width:1050px;
+    margin:auto;
+    padding-bottom:70px;
+}
+
+
+/* DATE */
+
+.section-title{
+    font-size:18px;
+    margin-bottom:15px;
+}
+
+.date-list{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:10px;
+    margin-bottom:35px;
+}
+
+.date-card{
+    background:#0e1117;
+    border:1px solid #252a32;
+    border-radius:10px;
+    padding:13px 5px;
+    text-align:center;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.date-card:hover{
+    border-color:#e50914;
+}
+
+.date-card.active{
+    background:#e50914;
+    border-color:#e50914;
+}
+
+.date-card .day{
+    display:block;
+    font-size:10px;
+    color:#858b95;
+    margin-bottom:4px;
+}
+
+.date-card.active .day{
+    color:#fff;
+}
+
+.date-card .number{
+    display:block;
+    font-size:19px;
+    font-weight:600;
+}
+
+.date-card .month{
+    display:block;
+    font-size:9px;
+    margin-top:3px;
+    color:#858b95;
+}
+
+.date-card.active .month{
+    color:#fff;
+}
+
+
+/* SHOWTIME */
+
+.show-section{
+    margin-bottom:30px;
+}
+
+.show-heading{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:13px;
+}
+
+.show-heading h2{
+    font-size:17px;
+}
+
+.show-heading span{
+    color:#777d87;
+    font-size:10px;
+}
+
+
+/* SHOW ROW */
+
+.show-row{
+    background:#0e1117;
+    border:1px solid #222630;
+    border-radius:12px;
+    padding:17px 20px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:10px;
+    transition:.3s;
+}
+
+.show-row:hover{
+    border-color:#454b56;
+}
+
+.show-details{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.time{
+    font-size:15px;
+    font-weight:600;
+    min-width:80px;
+}
+
+.format{
+    color:#888e97;
+    font-size:10px;
+}
+
+.screen{
+    color:#b0b4bc;
+    font-size:10px;
+    background:#171a20;
+    border:1px solid #292e36;
+    padding:5px 8px;
+    border-radius:5px;
+}
+
+.seat-status{
+    color:#45ce87;
+    font-size:10px;
+}
+
+.select-time{
+    padding:10px 19px;
+    background:transparent;
+    color:#fff;
+    border:1px solid #454a54;
+    border-radius:7px;
+    font-family:inherit;
+    font-size:10px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.select-time:hover,
+.select-time.selected{
+    background:#e50914;
+    border-color:#e50914;
+}
+
+
+/* BOTTOM */
+
+.continue-area{
+    margin-top:35px;
+    padding:20px;
+
+    background:#0e1117;
+    border:1px solid #252a32;
+    border-radius:12px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.selected-info{
+    color:#858b95;
+    font-size:11px;
+}
+
+.selected-info strong{
+    color:#fff;
+}
+
+.continue-btn{
+    padding:12px 25px;
+    background:#e50914;
+    color:#fff;
+    border:none;
+    border-radius:7px;
+    font-family:inherit;
+    font-weight:600;
+    font-size:11px;
+    cursor:pointer;
+}
+
+.continue-btn:hover{
+    background:#b80710;
+}
+
+
+/* FOOTER */
+
+footer{
+    background:#05070a;
+    border-top:1px solid #1c2028;
+    text-align:center;
+    padding:25px;
+}
+
+footer p{
+    color:#777c86;
+    font-size:12px;
+}
+
+footer span{
+    color:#e50914;
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width:800px){
+
+    nav{
+        display:none;
+    }
+
+    .date-list{
+        grid-template-columns:repeat(4,1fr);
+    }
+
+    .show-row{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:14px;
+    }
+
+    .select-time{
+        width:100%;
+    }
+
+    .continue-area{
+        flex-direction:column;
+        gap:15px;
+        align-items:stretch;
+    }
+
+    .continue-btn{
+        width:100%;
+    }
+}
+
+@media(max-width:500px){
+
+    .date-list{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .show-details{
+        flex-wrap:wrap;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<header>
+
+    <div class="logo">
+        🎬 Movie<span>Book</span>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="movies.html">Movies</a></li>
+            <li><a href="#">Cinemas</a></li>
+            <li><a href="#" class="active">Showtime</a></li>
+            <li><a href="#">Offers</a></li>
+        </ul>
+    </nav>
+
+    <div class="nav-buttons">
+        <button class="login">Login</button>
+        <button class="signup">Sign Up</button>
+    </div>
+
+</header>
+
+
+<!-- HEADER -->
+
+<section class="page-header">
+
+    <div class="step">
+        STEP 3 OF 5
+    </div>
+
+    <h1>
+        Select Date & Showtime
+    </h1>
+
+    <p>
+        <strong id="movieName">Movie</strong>
+        ·
+        <strong id="cinemaName">Cinema</strong>
+    </p>
+
+</section>
+
+
+<!-- PROGRESS -->
+
+<div class="progress">
+
+    <div class="circle">✓</div>
+
+    <div class="line"></div>
+
+    <div class="circle">✓</div>
+
+    <div class="line"></div>
+
+    <div class="circle">3</div>
+
+    <div class="line"></div>
+
+    <div class="circle">4</div>
+
+    <div class="line"></div>
+
+    <div class="circle">5</div>
+
+</div>
+
+
+<main class="main">
+
+
+    <!-- DATE -->
+
+    <h2 class="section-title">
+        Select Date
+    </h2>
+
+    <div class="date-list">
+
+        <div class="date-card active"
+             onclick="selectDate(this,'08 Aug 2026')">
+
+            <span class="day">TODAY</span>
+            <span class="number">08</span>
+            <span class="month">AUG</span>
+
+        </div>
+
+
+        <div class="date-card"
+             onclick="selectDate(this,'09 Aug 2026')">
+
+            <span class="day">SUN</span>
+            <span class="number">09</span>
+            <span class="month">AUG</span>
+
+        </div>
+
+
+        <div class="date-card"
+             onclick="selectDate(this,'10 Aug 2026')">
+
+            <span class="day">MON</span>
+            <span class="number">10</span>
+            <span class="month">AUG</span>
+
+        </div>
+
+
+        <div class="date-card"
+             onclick="selectDate(this,'11 Aug 2026')">
+
+            <span class="day">TUE</span>
+            <span class="number">11</span>
+            <span class="month">AUG</span>
+
+        </div>
+
+
+        <div class="date-card"
+             onclick="selectDate(this,'12 Aug 2026')">
+
+            <span class="day">WED</span>
+            <span class="number">12</span>
+            <span class="month">AUG</span>
+
+        </div>
+
+
+        <div class="date-card"
+             onclick="selectDate(this,'13 Aug 2026')">
+
+            <span class="day">THU</span>
+            <span class="number">13</span>
+            <span class="month">AUG</span>
+
+        </div>
+
+
+        <div class="date-card"
+             onclick="selectDate(this,'14 Aug 2026')">
+
+            <span class="day">FRI</span>
+            <span class="number">14</span>
+            <span class="month">AUG</span>
+
+        </div>
+
+    </div>
+
+
+    <!-- MORNING -->
+
+    <section class="show-section">
+
+        <div class="show-heading">
+
+            <h2>🌅 Morning Shows</h2>
+
+            <span>Available Shows</span>
+
+        </div>
+
+
+        <div class="show-row">
+
+            <div class="show-details">
+
+                <div class="time">
+                    09:00 AM
+                </div>
+
+                <div class="format">
+                    2D
+                </div>
+
+                <div class="screen">
+                    SCREEN 1
+                </div>
+
+                <div class="seat-status">
+                    ● Available
+                </div>
+
+            </div>
+
+            <button
+                class="select-time"
+                onclick="selectTime(this,'09:00 AM')">
+
+                Select
+
+            </button>
+
+        </div>
+
+
+        <div class="show-row">
+
+            <div class="show-details">
+
+                <div class="time">
+                    10:30 AM
+                </div>
+
+                <div class="format">
+                    2D
+                </div>
+
+                <div class="screen">
+                    SCREEN 2
+                </div>
+
+                <div class="seat-status">
+                    ● Available
+                </div>
+
+            </div>
+
+            <button
+                class="select-time"
+                onclick="selectTime(this,'10:30 AM')">
+
+                Select
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- AFTERNOON -->
+
+    <section class="show-section">
+
+        <div class="show-heading">
+
+            <h2>☀️ Afternoon Shows</h2>
+
+            <span>Available Shows</span>
+
+        </div>
+
+
+        <div class="show-row">
+
+            <div class="show-details">
+
+                <div class="time">
+                    01:15 PM
+                </div>
+
+                <div class="format">
+                    2D
+                </div>
+
+                <div class="screen">
+                    SCREEN 3
+                </div>
+
+                <div class="seat-status">
+                    ● Available
+                </div>
+
+            </div>
+
+            <button
+                class="select-time"
+                onclick="selectTime(this,'01:15 PM')">
+
+                Select
+
+            </button>
+
+        </div>
+
+
+        <div class="show-row">
+
+            <div class="show-details">
+
+                <div class="time">
+                    03:45 PM
+                </div>
+
+                <div class="format">
+                    IMAX
+                </div>
+
+                <div class="screen">
+                    SCREEN 4
+                </div>
+
+                <div class="seat-status">
+                    ● Available
+                </div>
+
+            </div>
+
+            <button
+                class="select-time"
+                onclick="selectTime(this,'03:45 PM')">
+
+                Select
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- EVENING -->
+
+    <section class="show-section">
+
+        <div class="show-heading">
+
+            <h2>🌆 Evening Shows</h2>
+
+            <span>Available Shows</span>
+
+        </div>
+
+
+        <div class="show-row">
+
+            <div class="show-details">
+
+                <div class="time">
+                    06:15 PM
+                </div>
+
+                <div class="format">
+                    2D
+                </div>
+
+                <div class="screen">
+                    SCREEN 1
+                </div>
+
+                <div class="seat-status">
+                    ● Available
+                </div>
+
+            </div>
+
+            <button
+                class="select-time"
+                onclick="selectTime(this,'06:15 PM')">
+
+                Select
+
+            </button>
+
+        </div>
+
+
+        <div class="show-row">
+
+            <div class="show-details">
+
+                <div class="time">
+                    07:30 PM
+                </div>
+
+                <div class="format">
+                    IMAX
+                </div>
+
+                <div class="screen">
+                    SCREEN 2
+                </div>
+
+                <div class="seat-status">
+                    ● Available
+                </div>
+
+            </div>
+
+            <button
+                class="select-time"
+                onclick="selectTime(this,'07:30 PM')">
+
+                Select
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- NIGHT -->
+
+    <section class="show-section">
+
+        <div class="show-heading">
+
+            <h2>🌙 Night Shows</h2>
+
+            <span>Available Shows</span>
+
+        </div>
+
+
+        <div class="show-row">
+
+            <div class="show-details">
+
+                <div class="time">
+                    09:45 PM
+                </div>
+
+                <div class="format">
+                    2D
+                </div>
+
+                <div class="screen">
+                    SCREEN 3
+                </div>
+
+                <div class="seat-status">
+                    ● Available
+                </div>
+
+            </div>
+
+            <button
+                class="select-time"
+                onclick="selectTime(this,'09:45 PM')">
+
+                Select
+
+            </button>
+
+        </div>
+
+
+        <div class="show-row">
+
+            <div class="show-details">
+
+                <div class="time">
+                    11:15 PM
+                </div>
+
+                <div class="format">
+                    IMAX
+                </div>
+
+                <div class="screen">
+                    SCREEN 4
+                </div>
+
+                <div class="seat-status">
+                    ● Available
+                </div>
+
+            </div>
+
+            <button
+                class="select-time"
+                onclick="selectTime(this,'11:15 PM')">
+
+                Select
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- CONTINUE -->
+
+    <div class="continue-area">
+
+        <div class="selected-info">
+
+            Date:
+            <strong id="selectedDate">
+                08 Aug 2026
+            </strong>
+
+            &nbsp; | &nbsp;
+
+            Showtime:
+            <strong id="selectedTime">
+                Not Selected
+            </strong>
+
+        </div>
+
+
+        <button
+            class="continue-btn"
+            onclick="continueToSeats()">
+
+            Continue to Seats →
+
+        </button>
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    <p>
+        © 2026 <span>MovieBook</span> |
+        Movie Ticket Booking System |
+        Internship Project
+    </p>
+
+</footer>
+
+
+<script>
+
+/* GET PREVIOUS DATA */
+
+const movie =
+    localStorage.getItem("selectedMovie")
+    || "Selected Movie";
+
+const cinema =
+    localStorage.getItem("selectedCinema")
+    || "Selected Cinema";
+
+
+document.getElementById("movieName").textContent =
+    movie;
+
+document.getElementById("cinemaName").textContent =
+    cinema;
+
+
+/* DATE */
+
+let selectedDate = "08 Aug 2026";
+
+function selectDate(card,date){
+
+    document
+    .querySelectorAll(".date-card")
+    .forEach(function(item){
+
+        item.classList.remove("active");
+
+    });
+
+    card.classList.add("active");
+
+    selectedDate = date;
+
+    document.getElementById(
+        "selectedDate"
+    ).textContent = date;
+
+    localStorage.setItem(
+        "selectedDate",
+        date
+    );
+}
+
+
+/* TIME */
+
+let selectedTime = "";
+
+function selectTime(button,time){
+
+    document
+    .querySelectorAll(".select-time")
+    .forEach(function(item){
+
+        item.classList.remove("selected");
+
+        item.textContent = "Select";
+
+    });
+
+    button.classList.add("selected");
+
+    button.textContent = "✓ Selected";
+
+    selectedTime = time;
+
+    document.getElementById(
+        "selectedTime"
+    ).textContent = time;
+
+    localStorage.setItem(
+        "selectedTime",
+        time
+    );
+}
+
+
+/* CONTINUE */
+
+function continueToSeats(){
+
+    if(selectedTime === ""){
+
+        alert(
+            "Please select a showtime first."
+        );
+
+        return;
+
+    }
+
+    localStorage.setItem(
+        "selectedDate",
+        selectedDate
+    );
+
+    localStorage.setItem(
+        "selectedTime",
+        selectedTime
+    );
+
+    window.location.href =
+        "seats.html";
+}
+
+</script>
+
+</body>
+</html>
